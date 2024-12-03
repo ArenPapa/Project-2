@@ -42,7 +42,7 @@ _TOK Connection: To what extent does ```the use of data science``` in climate re
 
 # Criteria B: Design
 
-## System Diagram **SL**
+## System Diagram **HL**
 
 ![System Diagrams unit 2 (2)](https://github.com/user-attachments/assets/36775cba-6730-45d3-bccb-57b4d8a8179d)
 

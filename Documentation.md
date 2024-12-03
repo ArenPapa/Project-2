@@ -3,6 +3,7 @@
 # Unit 2: A Distributed Weather Station for ISAK
 
 ## Criteria A: Planning
+problem definition//conclusion
 
 A: 500 C: 1500 E: 500
 

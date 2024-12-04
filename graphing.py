@@ -21,11 +21,11 @@ readings = data['readings'][0]
 
 # getting all the data from the server
 sensor = {
-    0: {"name": "temp_dht", "values": [], "timestamps": []}, #change sensor_id
-    1: {"name": "hum_dht", "values": [], "timestamps": []},  #change sensor_id
-    2: {"name": "temp_bmp", "values": [], "timestamps": []}, #change sensor_id
-    3: {"name": "hum_bmp", "values": [], "timestamps": []},  #change sensor_id
-    4: {"name": "pressure_bmp", "values": [], "timestamps": []}, #change sensor_id
+    185: {"name": "temp_dht", "values": [], "timestamps": []}, #change sensor_id
+    186: {"name": "hum_dht", "values": [], "timestamps": []},  #change sensor_id
+    187: {"name": "temp_bmp", "values": [], "timestamps": []}, #change sensor_id
+    188: {"name": "hum_bmp", "values": [], "timestamps": []},  #change sensor_id
+    197: {"name": "pressure_bmp", "values": [], "timestamps": []}, #change sensor_id
 }
 
 
@@ -37,19 +37,21 @@ for r in readings:
 # Temperature DHT ------------------------------------------------------------------------------------------------------
 plt.subplot(3,2,1)
 
-temp = sensor[0]['values']
-x = [0,len(sensor[0]['timestamps'])]
+temp = sensor[185]['values']
 y_temp = smooth(50, temp)
+x = list(range(len(y_temp)))
+x_time = [dt.datetime.fromisoformat(date_str) for date_str in sensor[185]['datetime']]
+
 plt.plot(x,y_temp,label= "Temperature DHT",color='red')
 plt.plot(x, non_linear(x,y_temp),label = "Non-linear Model", color = 'blue')
-plt.plot(x,np.mean(y_temp),label = "Mean", color = 'green')
-plt.plot(x,np.std(y_temp),label = "Standard Deviation", color = 'gold')
-plt.plot(x, np.min(y_temp), label = "Minimum", color = 'purple')
-plt.plot(x, np.max(y_temp), label = "Maximum", color = "pink")
-plt.plot(x, np.median(y_temp), label = "Median", color = "orange")
+plt.axhline(float(np.mean(y_temp)), label="Mean", color='green')
+plt.axhline(float(np.std(y_temp)),label = "Standard Deviation", color = 'gold')
+plt.axhline(np.min(y_temp), label = "Minimum", color = 'purple')
+plt.axhline(np.max(y_temp), label = "Maximum", color = "pink")
+plt.axhline(float(np.median(y_temp)), label = "Median", color = "orange")
 
 #prediction
-x_pred_time, y_pred_value = prediction_model(x,y_temp)
+x_pred_time, y_pred_value = prediction_model(x_time,y_temp)
 plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Temperature DHT")
@@ -60,19 +62,19 @@ plt.xlabel('Time')
 plt.ylabel("Temperature")
 
 # Temperature BMP-------------------------------------------------------------------------------------------------------
-plt.subplot(3,2,1)
+plt.subplot(3,2,2)
 
-tempBMP = sensor[2]['values']
+tempBMP = sensor[187]['values']
 y_temp_bmp = smooth(50, tempBMP)
 plt.plot(x,y_temp_bmp, label = "Temperature BMP", color = 'red')
 plt.plot(x, non_linear(x,y_temp_bmp), label = "Model", color = 'blue')
-plt.plot(x, np.mean(y_temp_bmp), label = "Mean", color = 'green')
-plt.plot(x, np.std(y_temp_bmp), label = "Standard Deviation", color = 'gold')
-plt.plot(x, np.min(y_temp_bmp), label = "Minimum", color = 'purple')
-plt.plot(x, np.max(y_temp_bmp), label = 'Maximum', color = 'pink')
-plt.plot(x, np.median(y_temp_bmp), label = "Median", color = 'orange')
+plt.axhline(float(np.mean(y_temp_bmp)), label="Mean", color='green')
+plt.axhline(float(np.std(y_temp_bmp)), label = "Standard Deviation", color = 'gold')
+plt.axhline(np.min(y_temp_bmp), label = "Minimum", color = 'purple')
+plt.axhline(np.max(y_temp_bmp), label = 'Maximum', color = 'pink')
+plt.axhline(float(np.median(y_temp_bmp)), label = "Median", color = 'orange')
 
-x_pred_time, y_pred_value = prediction_model(x,y_temp_bmp)
+x_pred_time, y_pred_value = prediction_model(x_time,y_temp_bmp)
 plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Temperature BMP")
@@ -83,19 +85,19 @@ plt.xlabel('Time')
 plt.ylabel("Temperature")
 
 # Humidity DHT----------------------------------------------------------------------------------------------------------
-plt.subplot(3,2,2)
+plt.subplot(3,2,3)
 
-humDHT = sensor[1]['values']
+humDHT = sensor[186]['values']
 y_hum_dht = smooth(50, humDHT)
 plt.plot(x, y_hum_dht, label = "Humidity DHT", color = 'red')
 plt.plot(x, non_linear(x,y_hum_dht), label = 'Model', color = 'blue')
-plt.plot(x, np.mean(y_hum_dht), label = "mean", color = "green")
-plt.plot(x, np.std(y_hum_dht), label = "Standard Deviation", color = 'gold')
-plt.plot(x, np.min(y_hum_dht), label = "Minimum", color = 'purple')
-plt.plot(x, np.max(y_hum_dht), label = 'Maximum', color = 'pink')
-plt.plot(x, np.median(y_hum_dht), label = "Median", color = 'orange')
+plt.axhline(float(np.mean(y_hum_dht)), label="Mean", color='green')
+plt.axhline(float(np.std(y_hum_dht)), label = "Standard Deviation", color = 'gold')
+plt.axhline(np.min(y_hum_dht), label = "Minimum", color = 'purple')
+plt.axhline(np.max(y_hum_dht), label = 'Maximum', color = 'pink')
+plt.axhline(float(np.median(y_hum_dht)), label = "Median", color = 'orange')
 
-x_pred_time, y_pred_value = prediction_model(x,y_hum_dht)
+x_pred_time, y_pred_value = prediction_model(x_time,y_hum_dht)
 plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Humidity DHT")
@@ -106,19 +108,19 @@ plt.xlabel('Time')
 plt.ylabel("Humidity")
 
 # Humidity BMP----------------------------------------------------------------------------------------------------------
-plt.subplot(3,2,1)
+plt.subplot(3,2,4)
 
-humBMP = sensor[3]['values']
+humBMP = sensor[188]['values']
 y_hum_bmp = smooth(50, humBMP)
 plt.plot(x, y_hum_bmp, label = "Humidity BMP", color = 'red')
 plt.plot(x, non_linear(x,y_hum_bmp), label = "Model", color = 'blue')
-plt.plot(x, np.mean(y_hum_bmp), label = "mean", color = "green")
-plt.plot(x, np.std(y_hum_bmp), label = "Standard Deviation", color = 'gold')
-plt.plot(x, np.min(y_hum_bmp), label = "Minimum", color = 'purple')
-plt.plot(x, np.max(y_hum_bmp), label = 'Maximum', color = 'pink')
-plt.plot(x, np.median(y_hum_bmp), label = "Median", color = 'orange')
+plt.axhline(float(np.mean(y_hum_bmp)), label="Mean", color='green')
+plt.axhline(float(np.std(y_hum_bmp)), label = "Standard Deviation", color = 'gold')
+plt.axhline(np.min(y_hum_bmp), label = "Minimum", color = 'purple')
+plt.axhline(np.max(y_hum_bmp), label = 'Maximum', color = 'pink')
+plt.axhline(float(np.median(y_hum_bmp)), label = "Median", color = 'orange')
 
-x_pred_time, y_pred_value = prediction_model(x,y_hum_bmp)
+x_pred_time, y_pred_value = prediction_model(x_time,y_hum_bmp)
 plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Humidity DHT")
@@ -129,18 +131,18 @@ plt.xlabel('Time')
 plt.ylabel("Humidity ()")
 
 # pressure BMP----------------------------------------------------------------------------------------------------------
-plt.subplot(3,2,3)
-pressure = sensor[4]['values']
+plt.subplot(3,2,5)
+pressure = sensor[197]['values']
 y_atm = smooth(50, pressure)
 plt.plot(x, y_atm, label = "Humidity BMP", color = 'red')
 plt.plot(x, non_linear(x,y_atm), label = "Model", color = 'blue')
-plt.plot(x, np.mean(y_atm), label = "mean", color = "green")
-plt.plot(x, np.std(y_atm), label = "Standard Deviation", color = 'gold')
-plt.plot(x, np.min(y_atm), label = "Minimum", color = 'purple')
-plt.plot(x, np.max(y_atm), label = 'Maximum', color = 'pink')
-plt.plot(x, np.median(y_atm), label = "Median", color = 'orange')
+plt.axhline(float(np.mean(y_atm)), label="Mean", color='green')
+plt.axhline(float(np.std(y_atm)), label = "Standard Deviation", color = 'gold')
+plt.axhline(np.min(y_atm), label = "Minimum", color = 'purple')
+plt.axhline(np.max(y_atm), label = 'Maximum', color = 'pink')
+plt.axhline(float(np.median(y_atm)), label = "Median", color = 'orange')
 
-x_pred_time, y_pred_value = prediction_model(x,y_atm)
+x_pred_time, y_pred_value = prediction_model(x_time,y_atm)
 plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Atmospheric Pressure")
@@ -150,3 +152,4 @@ plt.legend()
 plt.xlabel('Time')
 plt.ylabel("Atmospheric Pressure (hPa)")
 
+plt.show()

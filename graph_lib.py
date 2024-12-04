@@ -8,7 +8,7 @@ def non_linear(x:list,y:list):
     m, b, c = np.polyfit(x, y, deg = 2)
     y_quad = []
     for i in x:
-        y_quad += [m*i**2 + b*i +c]
+            y_quad += [m*i**2 + b*i +c]
     return y_quad
 
 # make the graph line smooth
@@ -28,9 +28,9 @@ def prediction_model(x: list, y: list):
     y_pred = []
 
     x_pred = list(np.arange(x[-1] + 1, x[-1] + 1 + 1440))
-    y_pred.append(m * i ** 2 + b * i + c for i in x_pred)
+    y_pred=[m * i ** 2 + b * i + c for i in x_pred]
 
-    timeStep = dt.timedelta(minutes = 1)
+    timeStep = int(dt.timedelta(minutes = 1))
 
     x_predTime = [x[-1] + timeStep * i for i in range(1,1441)]
 

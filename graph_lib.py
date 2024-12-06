@@ -1,6 +1,8 @@
 from matplotlib import pyplot as plt
 import numpy as np
+import matplotlib.dates as mdates
 import datetime as dt
+
 
 # non-linear model
 # what is getting here is the model of the
@@ -21,17 +23,17 @@ def smooth(windowSize: int, x:list) -> list:
 
     return x_smoothed
 
-
 def prediction_model(x: list, y: list):
-    m, b, c = np.polyfit(x, y, deg = 2)
-    x_pred = []
-    y_pred = []
+    #converting datetime format to numerical format
+    x_numeric = [mdates.date2num(time) for time in x]
+    # adjusting the length of the list to the y_list
+    x_numeric = x_numeric[:len(y)]
+    m, b, c = np.polyfit(x_numeric, y, deg = 2)
 
-    x_pred = list(np.arange(x[-1] + 1, x[-1] + 1 + 1440))
-    y_pred=[m * i ** 2 + b * i + c for i in x_pred]
+    timeStep = dt.timedelta(hours = 1)
 
-    timeStep = int(dt.timedelta(minutes = 1))
+    x_pred_time = [x[-1] + timeStep * i for i in range(1,25)]
+    x_pred_numeric = [mdates.date2num(time) for time in x_pred_time]
+    y_pred = [m * i ** 2 + b * i + c for i in x_pred_numeric]
 
-    x_predTime = [x[-1] + timeStep * i for i in range(1,1441)]
-
-    return x_predTime, y_pred
+    return x_pred_time, y_pred

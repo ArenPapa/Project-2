@@ -49,7 +49,7 @@
           try:
               temperature = bmp280.temperature
               pressure = bmp280.pressure
-              humidity = getattr(bmp280, "humidity", None)  # Humidity only available on BME280
+              humidity = getattr(bmp280, "humidity", None)  
               return temperature, pressure, humidity
           except RuntimeError as error:
               log_error(f"BME/BMP280 error: {error}")
@@ -68,10 +68,10 @@
       
       # Function to send the CSV file via SCP
       def send_csv_via_scp():
-          remote_host = "192.168.1.100"  # Replace with your computer's IP address
-          remote_user = "your_username"  # Replace with your computer's username
-          remote_password = "your_password"  # Replace with your password
-          remote_path = "/path/to/destination/sensor_data.csv"  # Replace with the destination path on the remote computer
+          remote_host = "192.168.1.100" 
+          remote_user = "your_username"  
+          remote_password = "your_password"  
+          remote_path = "/path/to/destination/sensor_data.csv"  
       
           try:
               # Initialize SCP client

@@ -21,7 +21,7 @@ readings = data['readings'][0]
 
 # getting all the data from the server
 sensor = {
-    10: {"name": "temp", "values": [], "timestamps": []},
+    454: {"name": "temp", "values": [], "timestamps": []},
     455: {"name": "hum", "values": [], "timestamps": []},
     456: {"name": "pressure", "values": [], "timestamps": []},
 }
@@ -34,8 +34,8 @@ for r in readings:
         timestamp = dt.datetime.fromisoformat(r['datetime'])
         sensor[r['sensor_id']]['timestamps'].append(timestamp)
 
-sensor[10]['values'] = sensor[10]['values'][0:1440]
-sensor[10]['timestamps'] = sensor[10]['timestamps'][0:1440]
+sensor[454]['values'] = sensor[10]['values'][0:1440]
+sensor[454]['timestamps'] = sensor[10]['timestamps'][0:1440]
 sensor[455]['values'] = sensor[455]['values'][0:1440]
 sensor[455]['timestamps'] = sensor[455]['timestamps'][0:1440]
 sensor[456]['values'] = sensor[456]['values'][0:1440]
@@ -47,21 +47,21 @@ print(len(sensor[455]['values']))
 
 plt.subplot(3,1,1)
 
-temp = sensor[10]['values'] # 48hours of temperature
+temp = sensor[454]['values'] # 48hours of temperature
 y_temp = smooth(50, temp) # moving_average
-x_time = sensor[10]['timestamps'][0:len(y_temp)] # datetime
+x_time = sensor[454]['timestamps'][0:len(y_temp)] # datetime
 x = list(np.arange(len(y_temp))) # list of number of index
 
 minTemp = np.min(y_temp)
 minX = y_temp[0]
-for i in range(len(sensor[10]['values'])):
-    if sensor[10]['values'][i] == minTemp:
+for i in range(len(sensor[454]['values'])):
+    if sensor[454]['values'][i] == minTemp:
         minX = x[i]
 
 maxTemp = np.max(y_temp)
 maxX_bmp = x[0]
 for i in range(len(y_temp)):
-    if sensor[10]['values'][i] == maxTemp:
+    if sensor[454]['values'][i] == maxTemp:
         maxX_bmp = x_time[i]
 
 plt.plot(x,y_temp, label = "Temperature BMP", color = 'r')

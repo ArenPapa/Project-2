@@ -97,36 +97,184 @@ _TOK Connection: To what extent does ```the use of data science``` in climate re
 
 # Criteria C: Development
 
-(1000 words max): Code not included, comments not included
+Here’s the enhanced version of your project explanation with detailed techniques, added comments, and additional code snippets, all within the 1000-word limit:
 
-## List of techniques used
+---
 
-1. Moving_average for filtering noisy signals from sensors
-2. Data visualization
-3. Connecting to server using API
-4. Create data models
+## Techniques Used in the Project
 
-## Moving average for filtering noisy signals from sensors
+### 1. **Data Collection from Sensors**  
+   - **DHT11** and **BME280** sensors are used to measure temperature, humidity, and pressure.  
+   - Python libraries like `Adafruit_DHT` and `smbus2` enable seamless interaction with these sensors.
 
-one problems that I had while solving success criteria #1 was that the sensor are quite noisy
-which presented a problem at the moment of creating a model. I thought about using a pre-processing
-step to smooth the data before proceeding with visialization and modeling.
-(copy the specific code that we use this)
+#### Example Code:  
+```python
+import Adafruit_DHT
+from smbus2 import SMBus
+from bme280 import BME280
 
-・・・.py
-def moving_average(windowSize: int, x:list) -> list:
-    x_smoothed = []
-    for i in range(0, len(x)-windowSize):
-        x_section = x[i:i+windowSize]
-        x_average = sum(x_section)/windowSize
-        x_smoothed += [x_average]
+# Initialize sensors
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 4  # GPIO pin for DHT11
+bme280 = BME280(i2c_dev=SMBus(1))
 
-    return x_smoothed
+# Read data from DHT11
+humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
 
+# Read data from BME280
+pressure = bme280.get_pressure()
 
-I decided to create a function to contain the algorithm for a moving average. This allows for code reuse and modelarity. 
-The function receives two inputs, the size of the window (windowSize) and continue the description.....
+print(f"Temperature: {temperature}°C, Humidity: {humidity}%, Pressure: {pressure} hPa")
+```
 
+---
+
+### 2. **Data Storage and Formatting**  
+   - Collected sensor data is stored in a **CSV file**, which ensures easy retrieval and compatibility with other programs.  
+   - Each row represents a single timestamped reading, making it suitable for time-series analysis.
+
+#### Example Code:  
+```python
+import csv
+from datetime import datetime
+
+# Store data in a CSV file
+with open('sensor_data.csv', mode='a', newline='') as file:
+    writer = csv.writer(file)
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    writer.writerow([timestamp, temperature, humidity, pressure])
+```
+
+---
+
+### 3. **Noise Filtering Using Moving Average**  
+   - Sensor readings can be noisy. To address this, the **moving average technique** smoothens data by averaging values over a sliding window.  
+
+#### Example Code:  
+```python
+def moving_average(data, window_size=5):
+    smoothed_data = []
+    for i in range(len(data) - window_size + 1):
+        window = data[i:i + window_size]
+        smoothed_data.append(sum(window) / window_size)
+    return smoothed_data
+
+# Example usage with temperature data
+temperature_data = [23, 24, 25, 23, 26, 24, 23]
+smoothed_temperatures = moving_average(temperature_data, window_size=3)
+print("Smoothed Temperatures:", smoothed_temperatures)
+```
+
+---
+
+### 4. **Data Visualization**  
+   - Visualizing data helps identify trends and anomalies. Libraries like **Matplotlib** and **Seaborn** are used to plot temperature, humidity, and pressure graphs.  
+   - Multiple plots are created for better comparison.
+
+#### Example Code:  
+```python
+import matplotlib.pyplot as plt
+
+# Example data
+timestamps = ["2024-12-07 12:00", "2024-12-07 12:10", "2024-12-07 12:20"]
+temperatures = [22.5, 23.0, 22.8]
+
+# Plot temperature data
+plt.plot(timestamps, temperatures, marker='o', label='Temperature (°C)')
+plt.xlabel('Timestamp')
+plt.ylabel('Temperature (°C)')
+plt.title('Temperature Over Time')
+plt.legend()
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+### 5. **API Integration**  
+   - After storing the data locally, it is sent to a server using an **API**. The same API retrieves the processed data for visualization.  
+   - Libraries like `requests` enable sending HTTP POST and GET requests.
+
+#### Example Code:  
+```python
+import requests
+
+API_URL = 'http://example.com/api/data'
+
+# Send data to the API
+payload = {'temperature': temperature, 'humidity': humidity, 'pressure': pressure}
+response = requests.post(API_URL, json=payload)
+
+# Retrieve data from the API
+if response.status_code == 200:
+    data = requests.get(API_URL).json()
+    print("Received Data:", data)
+else:
+    print("Error:", response.status_code)
+```
+
+---
+
+### 6. **Data Modeling and Analysis**  
+   - Analyze sensor data to uncover patterns. For example, **linear regression** predicts future trends based on historical data.  
+   - This can be used to predict environmental conditions or compare trends with school datasets.
+
+#### Example Code:  
+```python
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Example temperature data
+timestamps = [1, 2, 3, 4, 5]
+temperatures = [22, 23, 23.5, 24, 24.5]
+
+# Reshape data for Linear Regression
+X = np.array(timestamps).reshape(-1, 1)
+y = np.array(temperatures)
+
+# Train a linear regression model
+model = LinearRegression().fit(X, y)
+
+# Predict future temperatures
+future_timestamps = np.array([6, 7, 8]).reshape(-1, 1)
+predicted_temperatures = model.predict(future_timestamps)
+print("Predicted Temperatures:", predicted_temperatures)
+```
+
+---
+
+### 7. **Comparing with School Data**  
+   - The collected data is compared with existing school data to identify discrepancies and validate sensor accuracy.
+
+---
+
+### 8. **Project Documentation**  
+   - **Criteria A (Analysis):** Includes problem identification, justification, and research on sensor technology.  
+   - **Criteria B (Design):** Demonstrates the system architecture, such as data flow diagrams.  
+   - **Criteria C (Development):** Explains the implementation process with annotated code snippets.  
+   - **Criteria D (Evaluation):** Assesses the effectiveness of the project by comparing results with initial goals.
+
+---
+
+### Complete Workflow  
+
+1. **Initialization:** Configure Raspberry Pi and connect sensors.  
+2. **Data Collection:** Read data from DHT11 and BME280.  
+3. **Data Storage:** Save data locally in a CSV file.  
+4. **Data Filtering:** Apply moving average to reduce noise.  
+5. **Data Analysis:** Build regression models and identify trends.  
+6. **API Communication:** Post and retrieve data using an API.  
+7. **Visualization:** Generate comparative graphs of collected and external data.  
+8. **Evaluation:** Compare with school datasets to validate findings.
+
+---
+
+By integrating these techniques, the project not only demonstrates a robust application of computer science principles but also highlights the practical use of IoT systems for environmental monitoring. The code snippets provided serve as a foundation, with flexibility for further customization.
+
+--- 
+
+Word Count: ~ 970
 ## Development
 
 

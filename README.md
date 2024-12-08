@@ -106,6 +106,12 @@ Use of data science in climate research will fundamentally alter our perceptions
 
 **Fig.1** Fig. 1 Main function for posting the data. Call register_user() function to create a user account and call authenticate() function to log in and gain an authentication token. It iterates through each sensors to register them, and get sensor_ids. Open the CSV file and iterate by each row. Then, if either temperature, humidiy, or pressure is found, the value is posted to the server. Error is being handled using try-except. 
 
+<img width="623" alt="Screenshot 2024-12-09 at 8 50 24" src="https://github.com/user-attachments/assets/f04d4d17-9ac0-4940-8c75-cef8768c0822">
+**Fig.1** Fig. 1 This is the function called register_sensor which registers sensor handling the erorrs. Getting two inputs from the parameters, send post request to the server. If the status code is 201 which indicates success in registering sensor, it gets the sensor's ID. If it is not successfully registered, then it does error handling.
+
+
+
+
 
 ## System Diagram **HL**
 

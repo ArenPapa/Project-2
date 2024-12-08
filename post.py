@@ -48,15 +48,14 @@ def register_sensor(auth, sensor_data):
 
 # Post sensor readings
 def post_reading(auth, datetime_str, sensor_id, value):
-    # Ensure the timestamp from CSV is in ISO 8601 format
+    
     try:
-        # If datetime_str isn't in the correct format, you can parse and reformat it here
-        # Assuming the datetime format in CSV is already correct (e.g., '2024-12-08 12:34:56')
-        datetime_obj = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")  # Modify this if your format is different
+       
+        datetime_obj = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")  
         formatted_datetime = datetime_obj.isoformat()  # Convert to ISO format
 
         new_record = {"datetime": formatted_datetime, "sensor_id": sensor_id, "value": value}
-        response = requests.post(f"{BASE_URL}/reading/new", json=new_record, headers=auth)  # Correct endpoint
+        response = requests.post(f"{BASE_URL}/reading/new", json=new_record, headers=auth) 
         if response.status_code == 201:
             print(f"Reading posted: {new_record}")
         else:

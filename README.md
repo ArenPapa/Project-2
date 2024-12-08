@@ -86,7 +86,7 @@ Climate research brings four ethical dilemmas in the gathering, use, and interpr
 
 ---
 
-### Application to Your Project
+### Application to Our Project
 - **Reliability of data:** The accuracy of the sensors-DHT11 and BME280-is central to your project. Calibration and validation against other datasets will enhance confidence in the findings.
 - **Interpretation:** Comparing your data with campus readings raises interpretive challenges. Consider microclimates, building insulation, and human activity.
 - **Ethics:** The presentation of findings must be a discussion of the scope and limits of the project. Do not exaggerate conclusions or imply causation from correlation.

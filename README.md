@@ -44,7 +44,7 @@ Here’s an exploration of the **TOK connections** based on the questions provid
 
 ### **Connections to Knowledge Questions**
 
-#### 1. **How does our use of technology shape our understanding of the environment?
+#### 1. How does our use of technology shape our understanding of the environment?
 - **Data as a Lens:** Technology can collect, process, and visualize the environmental data that offers completely new insights into issues such as temperature trends, humidity level, and air pressure. These are enabled by tools like sensors, for example, DHT11 and BME280, which can quantify the phenomena that otherwise would have remained imperceptible.
 Bias and Limits of Technology: Our understanding is only as good as the quality and reliability of sensors, data models, and algorithms. For instance, sensors may have calibration errors or be unable to capture phenomena that occur at a very localized scale.
 - **Selective focus:** Technology often focuses on measurable aspects of the environment, perhaps to the detriment of subjective or qualitative elements, such as the cultural and community knowledge about climate.  
@@ -54,7 +54,7 @@ Bias and Limits of Technology: Our understanding is only as good as the quality 
 
 ---
 
-#### 2. **What are our responsibilities as technologists in handling personal data with respect to our living spaces?
+#### 2. What are our responsibilities as technologists in handling personal data with respect to our living spaces?
 - **Ethical use of data:** During projects involving smart sensors-monitoring indoor humidity or temperature, for example-the following question is raised: *Who owns the data?* If such data has to do with personal living conditions, then there will be privacy concerns.
 - **Transparency and consent:** Ethical practices call for clarity on how the data is collected, stored, shared, and used. In your project, it is important to ensure that the school community understands the purpose of data collection.
 - **Algorithmic responsibility:** When automating decisions, for example, to predict future environmental trends, the technologist is bound to ensure fairness, avoid biases, and prevent misuse of the data.
@@ -64,7 +64,7 @@ Bias and Limits of Technology: Our understanding is only as good as the quality 
 
 ---
 
-#### 3. **What cultural and contextual factors could affect our interpretation of the results, particularly in comparing our local readings with those of the campus?
+#### 3. What cultural and contextual factors could affect our interpretation of the results, particularly in comparing our local readings with those of the campus?
 Localized differences Environmental data is inherently contextual. For instance, the microclimate of one region, say near a forest, is very different from another region, say an urban campus.
 Cultural perspectives: Communities might value or interpret data through the lens of their value systems. For example, high temperatures might be considered as an indication of imbalance in cultures that believe in living in harmony with nature, while others may consider it a part of normal seasonal variation.
 - **Global vs. local scales:** Comparing local readings against broader datasets presents interpretation challenges. A small rise in temperature might seem insignificant locally but could have severe implications globally.

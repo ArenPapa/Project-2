@@ -30,11 +30,11 @@ Considering the budgetary constraints of the client and the hardware requirement
 1. The solution provides a visual representation of the Humidity, Temperature and atmospheric pressure (HL) values inside a dormitory (Local) and outside the house (Remote) for a period of minimum 48 hours. ```** [Issue tacled] **: This solves the lack of ability to monitor the environment on campus precisely over time. It also helps collecting data of trends within a day and also between days. My client's request, "he needs to know the best condition ... both inside and outside of the dormitory...In particular, he needsthe data of how temperature, humidity, and air pressure affect it. "```
 1. ```[HL]``` The local variables will be measure using a set of 3 sensors around the dormitory.```** [Issue tacled] **: This tests the accuracy of the data enhancing the trsut of the data. This meats the cliet's requirement "he needs to know the best condition for rose to grow .... precisely"```
 2. The solution provides a mathematical modelling for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations.```(HL: non-lineal model)``` ```** [Issue tacled] **: This simplifies and visualize data that is easy to analyze the trends.```
-3. The solution provides a comparative analysis for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations including mean, standad deviation, minimum, maximum, and median. ```** [Issue tacled] **: ```
-4. ```(SL)```The Local samples are stored in a csv file and ```(HL)``` posted to the remote server as a backup. ```** [Issue tacled] **: fill in here```
-5. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: fill in here```
-6. The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: fill in here```
-
+3. The solution provides a comparative analysis for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations including mean, standad deviation, minimum, maximum, and median. ```** [Issue tacled] **: Have more clear understanding of the condition and have more general understanding when analyzing data. ```
+4. ```(SL)```The Local samples are stored in a csv file and ```(HL)``` posted to the remote server as a backup. ```** [Issue tacled] **: Prevent the data loss by storing data in multiple places. ```
+5. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: The prediction allows the customers to adjust the conditions in the greenhouse once he gets to start his project. ```
+6. The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: Summarize all the project to visualize it and make it clear what we accomplished by this project.```
+7. 
 Here’s an exploration of the **TOK connections** based on the questions provided:
 
 ---

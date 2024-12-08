@@ -94,10 +94,43 @@ _TOK Connection: To what extent does ```the use of data science``` in climate re
 | 39      | Record a post-project reflection                              | Write a reflection on the challenges and successes of the project.                                               | 1 hour        | Dec 8                  | A         |
 | 40      | Reflect on potential improvements for similar future projects | Consider possible improvements or changes for a similar future project.                                          | 1 hour        | Dec 8                  | A         |
 ## Test Plan
+Here’s an expanded **step-by-step test plan table** with additional detailed steps to cover the entire process thoroughly. Each stage is explicitly outlined for clarity.
+
+---
+
+| **Step** | **Action**                                                                                      | **Expected Outcome**                                            | **Test Result** | **Notes**                                               |
+|----------|-------------------------------------------------------------------------------------------------|------------------------------------------------------------------|-----------------|---------------------------------------------------------|
+| 1        | Turn on your Mac and open the Terminal application.                                             | Mac boots up, and Terminal is ready for commands.               | Pass/Fail       | Ensure Wi-Fi connection is active.                     |
+| 2        | Power up the Raspberry Pi using a micro-USB or USB-C power supply.                              | Raspberry Pi boots up and connects to Wi-Fi.                    | Pass/Fail       | Confirm the Pi's status with a green activity light.   |
+| 3        | Use your Mac Terminal to connect to the Raspberry Pi via SSH.                                   | SSH connection is established, and Pi command line is accessible.| Pass/Fail       | Run `ssh pi@<IP_ADDRESS>`. Use `hostname -I` to find Pi's IP. |
+| 4        | Update the Raspberry Pi's operating system and libraries.                                       | Raspberry Pi is updated without errors.                         | Pass/Fail       | Run `sudo apt update && sudo apt upgrade -y`.          |
+| 5        | Open Raspberry Pi configuration to enable necessary interfaces (I2C, GPIO).                     | Interfaces are enabled successfully.                            | Pass/Fail       | Use `sudo raspi-config` to enable settings.            |
+| 6        | Reboot the Raspberry Pi to apply the changes.                                                   | Pi restarts and reconnects to Wi-Fi.                            | Pass/Fail       | Reconnect via SSH after rebooting.                     |
+| 7        | Connect the DHT11 sensor to the Raspberry Pi's GPIO pins using jumper wires.                    | DHT11 is securely connected to power, ground, and GPIO pin 4.    | Pass/Fail       | Use a pull-up resistor (10kΩ) between data and VCC.    |
+| 8        | Connect the BME280 sensor to the Raspberry Pi’s I2C pins (SDA, SCL).                            | BME280 is securely connected to power, ground, SDA, and SCL.     | Pass/Fail       | Ensure wires are connected to the correct I2C pins.    |
+| 9        | Install Python libraries required for sensors and data processing on the Raspberry Pi.          | All libraries are installed without errors.                     | Pass/Fail       | Run `pip3 install adafruit-circuitpython-dht smbus matplotlib`. |
+| 10       | Test the DHT11 sensor by running a basic Python script.                                         | DHT11 outputs temperature and humidity data to the terminal.     | Pass/Fail       | Use a simple script to confirm functionality.          |
+| 11       | Test the BME280 sensor by running a Python script.                                              | BME280 outputs temperature, pressure, and humidity data.         | Pass/Fail       | Verify that realistic data is displayed in the terminal. |
+| 12       | Apply a moving average filter to the sensor data.                                               | Filtered data reduces noise while maintaining realistic trends.  | Pass/Fail       | Verify by comparing filtered data with raw data.       |
+| 13       | Save collected data from both sensors to a CSV file.                                            | CSV file is created and updated with data in real-time.          | Pass/Fail       | Ensure file is correctly formatted and data is complete. |
+| 14       | Transfer the CSV file to your Mac using SCP (Secure Copy Protocol).                             | CSV file is successfully copied to the Mac.                     | Pass/Fail       | Run `scp pi@<IP_ADDRESS>:<file_path> <destination>`.   |
+| 15       | Create a Python script on your Mac to post the CSV data to an API server.                       | Data is successfully posted to the server.                      | Pass/Fail       | Confirm a successful HTTP 200 response code.          |
+| 16       | Retrieve data from the server API to validate successful storage.                               | Retrieved data matches the data posted from the Raspberry Pi.    | Pass/Fail       | Compare the API response with the original dataset.    |
+| 17       | Use Python's `Matplotlib` on your Mac to visualize data in graphs (temperature, humidity, pressure). | Graphs are generated, showing clear trends and patterns.         | Pass/Fail       | Ensure proper labeling of axes and units.             |
+| 18       | Compare collected data with school’s environmental data for accuracy and validation.            | Differences and similarities are documented.                    | Pass/Fail       | Note potential environmental or measurement anomalies. |
+| 19       | Clean up the Raspberry Pi by disconnecting sensors and shutting it down safely.                 | Raspberry Pi powers off safely and sensors are disconnected.     | Pass/Fail       | Run `sudo shutdown now` before removing power.         |
+| 20       | Prepare project documentation, including detailed analysis, results, and visualizations.        | Documentation is clear, concise, and meets the project criteria. | Pass/Fail       | Include details on challenges faced and solutions.     |
+
+---
+
+### **Additional Notes**  
+
+- **Step 7–8 (Sensor Setup)**: Double-check the wiring for both sensors before powering on the Raspberry Pi. Incorrect wiring could damage the sensors or the Pi.  
+- **Step 10–11 (Sensor Testing)**: Test each sensor independently to isolate potential issues.  
+- **Step 12 (Moving Average Filter)**: Include a mechanism to compare raw vs. filtered data for better understanding.  
+- **Step 15–16 (API Testing)**: Use tools like Postman to verify API endpoints before writing Python scripts.  
 
 # Criteria C: Development
-
-Here’s the enhanced version of your project explanation with detailed techniques, added comments, and additional code snippets, all within the 1000-word limit:
 
 ---
 

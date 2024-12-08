@@ -56,7 +56,8 @@ plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Temperature DHT")
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=20))  # Major ticks every 20 mins
+plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=3))
+plt.gca().xaxis.set_minor_locator(mdates.HourLocator(interval=1))  # Minor ticks every 1 hour
 plt.legend()
 plt.xlabel('Time')
 plt.ylabel("Temperature")
@@ -79,7 +80,8 @@ plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Temperature BMP")
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=20))  # Major ticks every 20 mins
+plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=3))
+plt.gca().xaxis.set_minor_locator(mdates.HourLocator(interval=1))  # Minor ticks every 1 hour
 plt.legend()
 plt.xlabel('Time')
 plt.ylabel("Temperature")
@@ -102,7 +104,8 @@ plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Humidity DHT")
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=20))  # Major ticks every 20 mins
+plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=3))
+plt.gca().xaxis.set_minor_locator(mdates.HourLocator(interval=1))  # Minor ticks every 1 hour
 plt.legend()
 plt.xlabel('Time')
 plt.ylabel("Humidity")
@@ -125,7 +128,8 @@ plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Humidity DHT")
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=20))  # Major ticks every 20 mins
+plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=3))
+plt.gca().xaxis.set_minor_locator(mdates.HourLocator(interval=1))  # Minor ticks every 1 hour
 plt.legend()
 plt.xlabel('Time')
 plt.ylabel("Humidity ()")
@@ -147,7 +151,9 @@ plt.plot(x_pred_time, y_pred_value, label = "Prediction", color = "black")
 
 plt.title("Atmospheric Pressure")
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-plt.gca().xaxis.set_major_locator(mdates.MinuteLocator(interval=20))  # Major ticks every 20 mins
+plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=3))
+plt.gca().xaxis.set_minor_locator(mdates.HourLocator(interval=1))  # Minor ticks every 1 hour
+
 plt.legend()
 plt.xlabel('Time')
 plt.ylabel("Atmospheric Pressure (hPa)")

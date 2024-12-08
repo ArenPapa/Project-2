@@ -270,11 +270,9 @@ print("Predicted Temperatures:", predicted_temperatures)
 
 ---
 
-By integrating these techniques, the project not only demonstrates a robust application of computer science principles but also highlights the practical use of IoT systems for environmental monitoring. The code snippets provided serve as a foundation, with flexibility for further customization.
 
---- 
 
-Word Count: ~ 970
+
 ## Development
 
 

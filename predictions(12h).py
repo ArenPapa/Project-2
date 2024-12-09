@@ -5,7 +5,7 @@ from sklearn.linear_model import LinearRegression
 from datetime import datetime, timedelta
 
 # Load the CSV file
-file_path = "sensor_data.csv"  # Replace with your file path
+file_path = "sensor_data.csv"  
 data = pd.read_csv(file_path)
 
 # Convert Timestamp to datetime

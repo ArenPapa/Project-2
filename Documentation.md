@@ -105,9 +105,9 @@ Use of data science in climate research will fundamentally alter our perceptions
 
 ## Flow Chart
 
-<img width="500" alt="Screenshot 2024-12-09 at 8 36 08" src="https://github.com/user-attachments/assets/97e4c8e4-383e-4f0d-8de1-c70d846a185b">
-<img width="500" alt="Screenshot 2024-12-09 at 8 37 35" src="https://github.com/user-attachments/assets/138640f2-50e1-42b6-92dd-4af536ac5369">
-<img width="500" alt="Screenshot 2024-12-09 at 8 38 36" src="https://github.com/user-attachments/assets/b38a4ee2-767b-423c-a0dd-e9e9a18ff794">
+<img width="700" alt="Screenshot 2024-12-09 at 8 36 08" src="https://github.com/user-attachments/assets/97e4c8e4-383e-4f0d-8de1-c70d846a185b">
+<img width="700" alt="Screenshot 2024-12-09 at 8 37 35" src="https://github.com/user-attachments/assets/138640f2-50e1-42b6-92dd-4af536ac5369">
+<img width="700" alt="Screenshot 2024-12-09 at 8 38 36" src="https://github.com/user-attachments/assets/b38a4ee2-767b-423c-a0dd-e9e9a18ff794">
 
 **Fig.1** Fig. 1 Main function for posting the data. Call register_user() function to create a user account and call authenticate() function to log in and gain an authentication token. It iterates through each sensors to register them, and get sensor_ids. Open the CSV file and iterate by each row. Then, if either temperature, humidiy, or pressure is found, the value is posted to the server. Error is being handled using try-except. 
 

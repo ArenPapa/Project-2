@@ -100,17 +100,17 @@ Use of data science in climate research will fundamentally alter our perceptions
 
 ## Flow Chart
 
-<img width="max" alt="Screenshot 2024-12-09 at 8 36 08" src="https://github.com/user-attachments/assets/97e4c8e4-383e-4f0d-8de1-c70d846a185b">
-<img width="max" alt="Screenshot 2024-12-09 at 8 37 35" src="https://github.com/user-attachments/assets/138640f2-50e1-42b6-92dd-4af536ac5369">
-<img width="max" alt="Screenshot 2024-12-09 at 8 38 36" src="https://github.com/user-attachments/assets/b38a4ee2-767b-423c-a0dd-e9e9a18ff794">
+<img width="500" alt="Screenshot 2024-12-09 at 8 36 08" src="https://github.com/user-attachments/assets/97e4c8e4-383e-4f0d-8de1-c70d846a185b">
+<img width="500" alt="Screenshot 2024-12-09 at 8 37 35" src="https://github.com/user-attachments/assets/138640f2-50e1-42b6-92dd-4af536ac5369">
+<img width="500" alt="Screenshot 2024-12-09 at 8 38 36" src="https://github.com/user-attachments/assets/b38a4ee2-767b-423c-a0dd-e9e9a18ff794">
 
 **Fig.1** Fig. 1 Main function for posting the data. Call register_user() function to create a user account and call authenticate() function to log in and gain an authentication token. It iterates through each sensors to register them, and get sensor_ids. Open the CSV file and iterate by each row. Then, if either temperature, humidiy, or pressure is found, the value is posted to the server. Error is being handled using try-except. 
 
-<img width="623" alt="Screenshot 2024-12-09 at 8 50 24" src="https://github.com/user-attachments/assets/f04d4d17-9ac0-4940-8c75-cef8768c0822">
+<img width="500" alt="Screenshot 2024-12-09 at 8 50 24" src="https://github.com/user-attachments/assets/f04d4d17-9ac0-4940-8c75-cef8768c0822">
 **Fig.2** Fig. 2 This is the function called register_sensor which registers sensor handling the erorrs. Getting two inputs from the parameters, send post request to the server. If the status code is 201 which indicates success in registering sensor, it gets the sensor's ID. If it is not successfully registered, then it does error handling.
 
 
-<img width="392" alt="Screenshot 2024-12-09 at 8 59 05" src="https://github.com/user-attachments/assets/26f5702a-c7c2-4d9d-bc4e-a8cbb25659a1">
+<img width="500" alt="Screenshot 2024-12-09 at 8 59 05" src="https://github.com/user-attachments/assets/26f5702a-c7c2-4d9d-bc4e-a8cbb25659a1">
 
 
 **Fig.3** Fig. 2 This is the function called smooth which accomplishes one of the success criteria of this project. This takes windowSize and x, which is a list, and then take the average of the values within the list using window size. It calculates values' average for each windoSize, and appending it to the list called x_smoothed, it will return the x_smoothed in order to use it to plot on the graph which this function makes it easier to see and simplies. 

@@ -113,7 +113,7 @@ Use of data science in climate research will fundamentally alter our perceptions
 <img width="500" alt="Screenshot 2024-12-09 at 8 59 05" src="https://github.com/user-attachments/assets/26f5702a-c7c2-4d9d-bc4e-a8cbb25659a1">
 
 
-**Fig.3** Fig. 2 This is the function called smooth which accomplishes one of the success criteria of this project. This takes windowSize and x, which is a list, and then take the average of the values within the list using window size. It calculates values' average for each windoSize, and appending it to the list called x_smoothed, it will return the x_smoothed in order to use it to plot on the graph which this function makes it easier to see and simplies. 
+**Fig.3** Fig. 3 This is the function called smooth which accomplishes one of the success criteria of this project. This takes windowSize and x, which is a list, and then take the average of the values within the list using window size. It calculates values' average for each windoSize, and appending it to the list called x_smoothed, it will return the x_smoothed in order to use it to plot on the graph which this function makes it easier to see and simplies. 
 
 ## System Diagram **HL**
 

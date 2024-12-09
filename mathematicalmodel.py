@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error
 
 # Load the dataset
-sensor_data = pd.read_csv("sensor_data.csv")  # Replace with the correct path to your file
+sensor_data = pd.read_csv("sensor_data.csv")  
 
 # Prepare data
 X = sensor_data[['Temperature (°C)', 'Pressure (hPa)']]  # Features

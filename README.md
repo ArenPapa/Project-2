@@ -108,7 +108,7 @@ Use of data science in climate research will fundamentally alter our perceptions
 
 ## Flow Chart
 
-<img width="max" alt="Screenshot 2024-12-13 at 4 07 48" src="https://github.com/user-attachments/assets/dc3da3ba-fbbb-44a3-9c3e-787c2640bd83" />
+<img width="max" alt="Screenshot 2024-12-13 at 8 33 11" src="https://github.com/user-attachments/assets/e97804a5-df61-48f2-8182-df0513559b35" />
 
 **Fig.1** Fig. 1 Main function for posting the data. Call register_user() function to create a user account and call authenticate() function to log in and gain an authentication token. It iterates through each sensors to register them, and get sensor_ids. Open the CSV file and iterate by each row. Then, if either temperature, humidiy, or pressure is found, the value is posted to the server. Error is being handled using try-except. 
 

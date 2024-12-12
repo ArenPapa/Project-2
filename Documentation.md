@@ -112,11 +112,11 @@ Use of data science in climate research will fundamentally alter our perceptions
 
 **Fig.1** Fig. 1 Main function for posting the data. Call register_user() function to create a user account and call authenticate() function to log in and gain an authentication token. It iterates through each sensors to register them, and get sensor_ids. Open the CSV file and iterate by each row. Then, if either temperature, humidiy, or pressure is found, the value is posted to the server. Error is being handled using try-except. 
 
-<img width="700" alt="Screenshot 2024-12-13 at 4 09 07" src="https://github.com/user-attachments/assets/f0deed35-f84c-4dcd-be75-a40fc8180474" />
+<img width="max" alt="Screenshot 2024-12-13 at 4 09 07" src="https://github.com/user-attachments/assets/f0deed35-f84c-4dcd-be75-a40fc8180474" />
 
 **Fig.2** Fig. 2 This is the function called register_sensor which registers sensor handling the erorrs. Getting two inputs from the parameters, send post request to the server. If the status code is 201 which indicates success in registering sensor, it gets the sensor's ID. If it is not successfully registered, then it does error handling.
 
-<img width="519" alt="Screenshot 2024-12-13 at 4 10 33" src="https://github.com/user-attachments/assets/52ec1fc0-ac52-45a0-9595-62a4ea85d9f4" />
+<img width="max" alt="Screenshot 2024-12-13 at 4 10 33" src="https://github.com/user-attachments/assets/52ec1fc0-ac52-45a0-9595-62a4ea85d9f4" />
 
 **Fig.3** Fig. 3 This is the function called smooth which accomplishes one of the success criteria of this project. This takes windowSize and x, which is a list, and then take the average of the values within the list using window size. It calculates values' average for each windoSize, and appending it to the list called x_smoothed, it will return the x_smoothed in order to use it to plot on the graph which this function makes it easier to see and simplies. 
 

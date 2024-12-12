@@ -289,16 +289,21 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 def predict_next_12_hours(time_numeric, values, time_step=3600, future_hours=12):
+  # find the best fit model for the future prediction taking values of time_numeric and values
   model = LinearRegression()  
   model.fit(time_numeric, values)
 
-  future_times = np.arange(time_numeric[-1][0] + time_step,
-  time_numeric[-1][0] + time_step * (future_hours + 1),
-  time_step).reshape(-1, 1)
+  #  find the future timestamps
+  future_times = np.arange(time_numeric[-1][0] + time_step, time_numeric[-1][0] + time_step * (future_hours + 1), time_step).reshape(-1, 1)
   future_values = model.predict(future_times)
+  # return values needed to plot
   return future_times, future_values
 
 ```
+
+The function takes four arguments: `time_numeric`, a list of timestamps that is collected and used for predicting future timestamps, `values`, list of all data collected that aligns with the timestamps stored in time_numeric, `time_step`, defines the interval of the prediction in seconds which the default is 3600, and `future_hours`, indicates the lengths of time of prediction generated in hours which the default is 12. A `model` is created to find the predicted model that fits with the data based on  inputs, `time_numeric` and values, by calling the function `LinearRegression()`. Then, `.fit(time_numeric, values)` trains the model stored in model and finds the best fit line and trains the model. The `future_times` stores the points of future timestamps getting the latest timestamp and adding `time_step` up to `future_hours`. To adjust the `future_times` to be a 2D array so that it is able to work with `LinearRegression()`, `.reshape(-1, 1)` is used. Once the future timestamps are generated, `future_values` generates prediction values for each future timestamps using model that is trained before. It returns `time_values` and `future_values` later to plot them. 
+
+Initially, I created model taking the coefficient of the currenty graph and use it as a prediction. However, I found out that the coefficients aren't always the same and therefore the prediction model generated based on it is inaccurate. To generate better prediction model, I decided to use `LinearRegression` model. 
 
 ---
 

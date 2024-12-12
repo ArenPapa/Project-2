@@ -254,8 +254,6 @@ In the example, `temperature_data` contains a list of temperature readings. The 
 
 I have decided to store the data in the API, given that the client moves between many campuses and requires multiple ways of accessing data. The same API retrieves the processed data for visualization. Libraries like requests enable sending HTTP POST and GET requests. 
 
-
-#### 
 ```python
 import requests
 
@@ -305,6 +303,24 @@ def predict_next_12_hours(time_numeric, values, time_step=3600, future_hours=12)
 
 The function takes four arguments: `time_numeric`, a list of timestamps that is collected and used for predicting future timestamps, `values`, list of all data collected that aligns with the timestamps stored in time_numeric, `time_step`, defines the interval of the prediction in seconds which the default is 3600, and `future_hours`, indicates the lengths of time of prediction generated in hours which the default is 12. A `model` is created to find the predicted model that fits with the data based on  inputs, `time_numeric` and values, by calling the function `LinearRegression()`. Then, `.fit(time_numeric, values)` trains the model stored in model and finds the best fit line and trains the model. The `future_times` stores the points of future timestamps getting the latest timestamp and adding `time_step` up to `future_hours`. To adjust the `future_times` to be a 2D array so that it is able to work with `LinearRegression()`, `.reshape(-1, 1)` is used. Once the future timestamps are generated, `future_values` generates prediction values for each future timestamps using model that is trained before. It returns `time_values` and `future_values` later to plot them. 
 
+Here is the example usage with temperature data:
+
+```python
+# Example usage with temperature data
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
+
+temperature = data['Temperature (°C)']
+time_numeric = (timestamps - timestamps.min()).dt.total_seconds().values.reshape(-1, 1)
+future_time_temp, future_temp = predict_next_12_hours(time_numeric, temperature, time_step, future_hours)
+future_time_labels = [timestamps.max() + timedelta(seconds=i * time_step) for i in range(1, len(future_temp) + 1)]
+plt.plot(future_time_labels, future_temp, label="Predicted Temperature", color="red", linestyle="--")
+
+```
+
+In the example, `future_time_temp` contains a list of future timestamps. The `future_temp` contains a list of predicted temperatures. The function is called with `time_numeric`, `temperature`, `time_step` of 3600, `future_hours` of 12. Using the values reutrned, `future_time_temp` and `futuer_temp` the graph of temperature prediction is generated.  
+
+
 
 ---
 
@@ -343,7 +359,6 @@ sensor[456]['timestamps'] = sensor[456]['timestamps'][0:1440]
 ```
 
 The `sensor` dictionary has a key for each sensor IDs, 454, 455, and 456. The value for each key is a dictionary that contains `name`, information of the data stored, `values`, data collected, and `timestamps`, time that the data is collected. Each value inside the values is an empty list. The variable `readings` is a predeclared dictionary that holds the data stored in the ISAK-S. It iterates through each reading in `readings` as `r`. If `sensor_id` in `r` exists in `sensor`, then the value that’s named value inside `r[‘sensor_id’]` will be appended to the `values` in `sensor`. `Timestamp` stores the value inside `r`, named `datetime`, after the conversion of ISO format to Python datetime object which later helps with plotting data without type errors. After the conversion, the `timestamp` is appended to `sensor` value named `timestamps`. Once iteration is completed, `sensor` must have all data from the server. In order to just get information about 24 hours to make the later progress more efficient, each value stored in `values` and `timestamps` are striped and only the first 1440 values are stored to make it easier to work with graphing the latest 24 hours data. 
-
 
 
 ---

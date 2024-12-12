@@ -212,29 +212,41 @@ Here’s an expanded **step-by-step test plan table** with additional detailed s
 
 ## Techniques Used in the Project
 
-### 1. **Data Collection from Sensors**  
-   - **DHT11** and **BME280** sensors are used to measure temperature, humidity, and pressure.  
-   - Python libraries like `Adafruit_DHT` and `smbus2` enable seamless interaction with these sensors.
+1. Lists and dictionaries for storing and organizing data
+2. For loops and While loops for iterating the data
+3. Moving average for smoothing the data
+4. API Integration for storing the data
+5. 
 
-#### Example Code:  
+
+
+### 1. Moving average for smoothing the data
+
+I decided to smooth the data since the sensor readings are noisy, and the client prefers smoother graphs over raw ones (SC#6). To address this, the moving average technique is an adequate technique to smoothen data by averaging values over a sliding window. 
+  
 ```python
-import Adafruit_DHT
-from smbus2 import SMBus
-from bme280 import BME280
+def moving_average(data, window_size=5):
+    smoothed_data = []
+    for i in range(len(data) - window_size + 1):
+        window = data[i:i + window_size]
+        smoothed_data.append(sum(window) / window_size)
+    return smoothed_data
 
-# Initialize sensors
-DHT_SENSOR = Adafruit_DHT.DHT11
-DHT_PIN = 4  # GPIO pin for DHT11
-bme280 = BME280(i2c_dev=SMBus(1))
-
-# Read data from DHT11
-humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-
-# Read data from BME280
-pressure = bme280.get_pressure()
-
-print(f"Temperature: {temperature}°C, Humidity: {humidity}%, Pressure: {pressure} hPa")
 ```
+
+This code defines a `moving_average` function that calculates the moving average of a given data over a specified window size. The `moving_average` function takes two arguments: `data`, a list of numeric values like temperatures, and  `window_size`, the number of consecutive elements to consider for calculating the average of which the default value is 5. Then it creates an empty list, `smoothed_data`, to store the calculated moving average values. A `for loop` then iterates over the `data` list and stops when full `window_size` data is available for averaging. The loop runs from index 0 to `len(data) - window_size`. In each iteration, a "window" of `window_size` elements is extracted from the `data` list, starting at index `i`. When the loop finishes, the moving averages for all possible windows are now stored in the `smoothed_data` list by using `append()`.
+
+Here is the example usage with temperature data:
+
+```python
+# Example usage with temperature data
+temperature_data = [23, 24, 25, 23, 26, 24, 23]
+smoothed_temperatures = moving_average(temperature_data, window_size=3)
+print("Smoothed Temperatures:", smoothed_temperatures)
+
+```
+
+In the example, `temperature_data` contains a list of temperature readings. The `moving_average` function is called with a `window_size` of 3. 
 
 ---
 

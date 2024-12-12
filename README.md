@@ -39,9 +39,9 @@ Considering the budgetary constraints of the client and the hardware requirement
 3. The solution provides a mathematical modelling for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations.```(HL: non-lineal model)``` ```** [Issue tacled] **: "The second challenge is he does not have an efficient way to visualize the humidity, temperature, and air pressure each minute to analyze data trends."```
 4. The solution provides a comparative analysis for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations including mean, standad deviation, minimum, maximum, and median. ```** [Issue tacled] **: "The second challenge is he does not have an efficient way to visualize the humidity, temperature, and air pressure each minute to analyze data trends." ```
 5. The Local samples are stored in a csv file and posted to the remote server as a backup. ```** [Issue tacled] **: "The third challenge is he moves between many campuses and requires multiple ways of accessing data, which is currently difficult on paper."```
-6. The solution provides data-smoothed graphs for each humidity, temperature, and atmospheric pressure levels. ```** [Issue tacled] **: "Additionally, he prefers smoother graphs over raw ones"```
-7. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he ... wants the ability to predict data trends for the next 12 hours using both linear and quadratic models"```
-8.  The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he wants a poster with the visualized data and advices on how to cultivate roses along with the process of this system development."```
+6. The solution provides data-smoothed graphs for each Humidity, Temperature, and Atmospheric Pressure levels. ```** [Issue tacled] **: "Additionally, he prefers smoother graphs over raw ones"```
+7. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and Atmospheric Pressure (HL). ```** [Issue tacled] **: "he ... wants the ability to predict data trends for the next 12 hours using both linear and quadratic models"```
+8.  The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and Atmospheric Pressure (HL). ```** [Issue tacled] **: "he wants a poster with the visualized data and advices on how to cultivate roses along with the process of this system development."```
 
 Here’s an exploration of the **TOK connections** based on the questions provided:
 
@@ -222,14 +222,14 @@ Here’s an expanded **step-by-step test plan table** with additional detailed s
 
 ### 1. Moving average for smoothing the data
 
-I decided to smooth the data since the sensor readings are noisy, and the client prefers smoother graphs over raw ones (SC#6). To address this, the moving average technique is an adequate technique to smoothen data by averaging values over a sliding window. 
+I decided to smooth the data since the sensor readings are noisy, and the client prefers smoother graphs over raw ones **(Success Criteria #6)**. To address this, **the moving average technique** is an adequate technique to smoothen data by averaging values over a sliding window. 
   
 ```python
 def moving_average(data, window_size=5):
     smoothed_data = []
-    for i in range(len(data) - window_size + 1):
-        window = data[i:i + window_size]
-        smoothed_data.append(sum(window) / window_size)
+    for i in range(len(data) - window_size + 1): # iterate through the appropriate number of times considering the windowsize 
+        window = data[i:i + window_size] # adjusting window range
+        smoothed_data.append(sum(window) / window_size) # claculate the average within the window range
     return smoothed_data
 
 ```
@@ -278,22 +278,26 @@ The `requests.post()` function is used to send the `payload` as a JSON object to
 
 ---
 
-### 3. **Noise Filtering Using Moving Average**  
-   - Sensor readings can be noisy. To address this, the **moving average technique** smoothens data by averaging values over a sliding window.  
+### 3. 12 Hours Prediction
 
-#### Example Code:  
+I have decided to calculate the subsequent 12 hours prediction based on the data collected over the past 48 hours. **(Success Criteria #7)** To achieve this, the function `predict_next_12_hours` is developed. It is designed to precisely calculate the prediction of each temperature, humidity, and air pressure. A library, `numpy`, is imported to create numerical arrays. Another library, `LinearRegression` is imported to fit the data and predict future values accurately using its machine learning model. 
+
+#### 
 ```python
-def moving_average(data, window_size=5):
-    smoothed_data = []
-    for i in range(len(data) - window_size + 1):
-        window = data[i:i + window_size]
-        smoothed_data.append(sum(window) / window_size)
-    return smoothed_data
 
-# Example usage with temperature data
-temperature_data = [23, 24, 25, 23, 26, 24, 23]
-smoothed_temperatures = moving_average(temperature_data, window_size=3)
-print("Smoothed Temperatures:", smoothed_temperatures)
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+def predict_next_12_hours(time_numeric, values, time_step=3600, future_hours=12):
+  model = LinearRegression()  
+  model.fit(time_numeric, values)
+
+  future_times = np.arange(time_numeric[-1][0] + time_step,
+  time_numeric[-1][0] + time_step * (future_hours + 1),
+  time_step).reshape(-1, 1)
+  future_values = model.predict(future_times)
+  return future_times, future_values
+
 ```
 
 ---

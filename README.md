@@ -282,6 +282,8 @@ The `requests.post()` function is used to send the `payload` as a JSON object to
 
 I have decided to calculate the subsequent 12 hours prediction based on the data collected over the past 48 hours. **(Success Criteria #7)** To achieve this, the function `predict_next_12_hours` is developed. It is designed to precisely calculate the prediction of each temperature, humidity, and air pressure. A library, `numpy`, is imported to create numerical arrays. Another library, `LinearRegression` is imported to fit the data and predict future values accurately using its machine learning model. 
 
+Initially, I created model taking the value of coefficient that the current graph uses and use it as a prediction. However, I found out that the coefficients aren't always the same and therefore the prediction model generated based on it is inaccurate. To generate better prediction model, I decided to use `LinearRegression` model. 
+
 #### 
 ```python
 
@@ -303,7 +305,6 @@ def predict_next_12_hours(time_numeric, values, time_step=3600, future_hours=12)
 
 The function takes four arguments: `time_numeric`, a list of timestamps that is collected and used for predicting future timestamps, `values`, list of all data collected that aligns with the timestamps stored in time_numeric, `time_step`, defines the interval of the prediction in seconds which the default is 3600, and `future_hours`, indicates the lengths of time of prediction generated in hours which the default is 12. A `model` is created to find the predicted model that fits with the data based on  inputs, `time_numeric` and values, by calling the function `LinearRegression()`. Then, `.fit(time_numeric, values)` trains the model stored in model and finds the best fit line and trains the model. The `future_times` stores the points of future timestamps getting the latest timestamp and adding `time_step` up to `future_hours`. To adjust the `future_times` to be a 2D array so that it is able to work with `LinearRegression()`, `.reshape(-1, 1)` is used. Once the future timestamps are generated, `future_values` generates prediction values for each future timestamps using model that is trained before. It returns `time_values` and `future_values` later to plot them. 
 
-Initially, I created model taking the value of coefficient that the current graph uses and use it as a prediction. However, I found out that the coefficients aren't always the same and therefore the prediction model generated based on it is inaccurate. To generate better prediction model, I decided to use `LinearRegression` model. 
 
 ---
 
@@ -311,6 +312,7 @@ Initially, I created model taking the value of coefficient that the current grap
 
 I have decided to get and store data for visualizing the data later as my client requested to visualize each temperature, humidity, and air pressure. **(Success Criteria # 1)**. To accomplish it, I found **iteration** and **conditional statements** are reasonable methods to use. 
 
+Originally, I developed an iteration that loops each `r[‘sensor_id’]` and appends the value to the `sensor` if it matches with either 454, 455, or 456. However, it is inefficient and takes unnecessary processing time. Therefore, I decided to construct the code the following: 
 
 ####  
 ```python
@@ -343,7 +345,6 @@ sensor[456]['timestamps'] = sensor[456]['timestamps'][0:1440]
 The `sensor` dictionary has a key for each sensor IDs, 454, 455, and 456. The value for each key is a dictionary that contains `name`, information of the data stored, `values`, data collected, and `timestamps`, time that the data is collected. Each value inside the values is an empty list. The variable `readings` is a predeclared dictionary that holds the data stored in the ISAK-S. It iterates through each reading in `readings` as `r`. If `sensor_id` in `r` exists in `sensor`, then the value that’s named value inside `r[‘sensor_id’]` will be appended to the `values` in `sensor`. `Timestamp` stores the value inside `r`, named `datetime`, after the conversion of ISO format to Python datetime object which later helps with plotting data without type errors. After the conversion, the `timestamp` is appended to `sensor` value named `timestamps`. Once iteration is completed, `sensor` must have all data from the server. In order to just get information about 24 hours to make the later progress more efficient, each value stored in `values` and `timestamps` are striped and only the first 1440 values are stored to make it easier to work with graphing the latest 24 hours data. 
 
 
-Originally, I developed an iteration that loops each `r[‘sensor_id’]` and appends the value to the `sensor` if it matches with either 454, 455, or 456. However, it is inefficient since the code loops through all the data that I don’t need which takes more time. Therefore, I decided to use conditional statements instead of nested loops and conditional statements. 
 
 ---
 

@@ -41,7 +41,7 @@ Considering the budgetary constraints of the client and the hardware requirement
 5. The Local samples are stored in a csv file and posted to the remote server as a backup. ```** [Issue tacled] **: "The third challenge is he moves between many campuses and requires multiple ways of accessing data, which is currently difficult on paper."```
 6. The solution provides data-smoothed graphs for each humidity, temperature, and atmospheric pressure levels. ```** [Issue tacled] **: "Additionally, he prefers smoother graphs over raw ones"```
 7. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he ... wants the ability to predict data trends for the next 12 hours using both linear and quadratic models"```
-8.  The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he wants a poster with the visualized data and advices on how to cultivate roses along with the process of this system development. "```
+8.  The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he wants a poster with the visualized data and advices on how to cultivate roses along with the process of this system development."```
 
 Here’s an exploration of the **TOK connections** based on the questions provided:
 

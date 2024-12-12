@@ -42,8 +42,9 @@ Considering the budgetary constraints of the client and the hardware requirement
 3. The solution provides a comparative analysis for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations including mean, standad deviation, minimum, maximum, and median. ```** [Issue tacled] **: Have more clear understanding of the condition and have more general understanding when analyzing data. ```
 4. ```(SL)```The Local samples are stored in a csv file and ```(HL)``` posted to the remote server as a backup. ```** [Issue tacled] **: Prevent the data loss by storing data in multiple places. ```
 5. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: The prediction allows the customers to adjust the conditions in the greenhouse once he gets to start his project. ```
-6. The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: Summarize all the project to visualize it and make it clear what we accomplished by this project.```
-7. 
+6. 
+7.  The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: Summarize all the project to visualize it and make it clear what we accomplished by this project.```
+8. 
 Here’s an exploration of the **TOK connections** based on the questions provided:
 
 ---

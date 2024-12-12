@@ -250,21 +250,31 @@ In the example, `temperature_data` contains a list of temperature readings. The 
 
 ---
 
-### 2. **Data Storage and Formatting**  
-   - Collected sensor data is stored in a **CSV file**, which ensures easy retrieval and compatibility with other programs.  
-   - Each row represents a single timestamped reading, making it suitable for time-series analysis.
+### 2. API integration for storing the data 
 
-#### Example Code:  
+I have decided to store the data in the API, given that the client moves between many campuses and requires multiple ways of accessing data. The same API retrieves the processed data for visualization. Libraries like requests enable sending HTTP POST and GET requests. 
+
+
+#### 
 ```python
-import csv
-from datetime import datetime
+import requests
 
-# Store data in a CSV file
-with open('sensor_data.csv', mode='a', newline='') as file:
-    writer = csv.writer(file)
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    writer.writerow([timestamp, temperature, humidity, pressure])
+API_URL = 'http://example.com/api/data'
+
+# Send data to the API
+payload = {'temperature': temperature, 'humidity': humidity, 'pressure': pressure}
+response = requests.post(API_URL, json=payload)
+
+# Retrieve data from the API
+if response.status_code == 200:
+    data = requests.get(API_URL).json()
+    print("Received Data:", data)
+else:
+    print("Error:", response.status_code)
+
 ```
+The `API_URL` variable stores the endpoint of the REST API. In this example, it points to 'http://example.com/api/data'. A `payload` dictionary is created to hold the data to be sent to the API. It includes key-value pairs for `temperature`, `humidity`, and `pressure`.
+The `requests.post()` function is used to send the `payload` as a JSON object to the API. The `json=payload` parameter automatically converts the Python dictionary into a JSON format before sending all the informations. The `response.status_code` checks the HTTP status code returned by the API. In this case, the status code of `200` indicates that the request was successful. If the POST request is successful, the code retrieves data from the API using a GET request. The `requests.get()` function sends a GET request to the `API_URL`, and the `.json()` method parses the response into a Python dictionary or list.
 
 ---
 

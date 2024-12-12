@@ -303,97 +303,47 @@ def predict_next_12_hours(time_numeric, values, time_step=3600, future_hours=12)
 
 The function takes four arguments: `time_numeric`, a list of timestamps that is collected and used for predicting future timestamps, `values`, list of all data collected that aligns with the timestamps stored in time_numeric, `time_step`, defines the interval of the prediction in seconds which the default is 3600, and `future_hours`, indicates the lengths of time of prediction generated in hours which the default is 12. A `model` is created to find the predicted model that fits with the data based on  inputs, `time_numeric` and values, by calling the function `LinearRegression()`. Then, `.fit(time_numeric, values)` trains the model stored in model and finds the best fit line and trains the model. The `future_times` stores the points of future timestamps getting the latest timestamp and adding `time_step` up to `future_hours`. To adjust the `future_times` to be a 2D array so that it is able to work with `LinearRegression()`, `.reshape(-1, 1)` is used. Once the future timestamps are generated, `future_values` generates prediction values for each future timestamps using model that is trained before. It returns `time_values` and `future_values` later to plot them. 
 
-Initially, I created model taking the coefficient of the currenty graph and use it as a prediction. However, I found out that the coefficients aren't always the same and therefore the prediction model generated based on it is inaccurate. To generate better prediction model, I decided to use `LinearRegression` model. 
+Initially, I created model taking the value of coefficient that the current graph uses and use it as a prediction. However, I found out that the coefficients aren't always the same and therefore the prediction model generated based on it is inaccurate. To generate better prediction model, I decided to use `LinearRegression` model. 
 
 ---
 
-### 4. **Data Visualization**  
-   - Visualizing data helps identify trends and anomalies. Libraries like **Matplotlib** and **Seaborn** are used to plot temperature, humidity, and pressure graphs.  
-   - Multiple plots are created for better comparison.
+### 4. Retrieving Data from the Sensor 
 
-#### Example Code:  
+I have decided to get and store data for visualizing the data later as my client requested to visualize each temperature, humidity, and air pressure. **(Success Criteria # 1)**. To accomplish it, I found **iteration** and **conditional statements** are reasonable methods to use. 
+
+
+####  
 ```python
-import matplotlib.pyplot as plt
+import datetime as dt
 
-# Example data
-timestamps = ["2024-12-07 12:00", "2024-12-07 12:10", "2024-12-07 12:20"]
-temperatures = [22.5, 23.0, 22.8]
+# getting all the data from the server
+sensor = {
+    454: {"name": "temp", "values": [], "timestamps": []},
+    455: {"name": "hum", "values": [], "timestamps": []},  
+    456: {"name": "pressure", "values": [], "timestamps": []}, 
+}
 
-# Plot temperature data
-plt.plot(timestamps, temperatures, marker='o', label='Temperature (°C)')
-plt.xlabel('Timestamp')
-plt.ylabel('Temperature (°C)')
-plt.title('Temperature Over Time')
-plt.legend()
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+for r in readings:
+  if r['sensor_id'] in sensor:
+    # getting the value and store them into each sensor_ib
+    sensor[r["sensor_id"]]["values"].append(r['value'])
+    timestamp = dt.datetime.fromisoformat(r['datetime'])
+    sensor[r['sensor_id']]['timestamps'].append(timestamp)
+
+# storing information to each keys(values, temperature) inside of the keys(sensor_id) 
+sensor[454]['values'] = sensor[10]['values'][0:1440]
+sensor[454]['timestamps'] = sensor[10]['timestamps'][0:1440]
+sensor[455]['values'] = sensor[455]['values'][0:1440]
+sensor[455]['timestamps'] = sensor[455]['timestamps'][0:1440]
+sensor[456]['values'] = sensor[456]['values'][0:1440]
+sensor[456]['timestamps'] = sensor[456]['timestamps'][0:1440]
+
 ```
 
----
+The `sensor` dictionary has a key for each sensor IDs, 454, 455, and 456. The value for each key is a dictionary that contains `name`, information of the data stored, `values`, data collected, and `timestamps`, time that the data is collected. Each value inside the values is an empty list. The variable `readings` is a predeclared dictionary that holds the data stored in the ISAK-S. It iterates through each reading in `readings` as `r`. If `sensor_id` in `r` exists in `sensor`, then the value that’s named value inside `r[‘sensor_id’]` will be appended to the `values` in `sensor`. `Timestamp` stores the value inside `r`, named `datetime`, after the conversion of ISO format to Python datetime object which later helps with plotting data without type errors. After the conversion, the `timestamp` is appended to `sensor` value named `timestamps`. Once iteration is completed, `sensor` must have all data from the server. In order to just get information about 24 hours to make the later progress more efficient, each value stored in `values` and `timestamps` are striped and only the first 1440 values are stored to make it easier to work with graphing the latest 24 hours data. 
 
-### 5. **API Integration**  
-   - After storing the data locally, it is sent to a server using an **API**. The same API retrieves the processed data for visualization.  
-   - Libraries like `requests` enable sending HTTP POST and GET requests.
 
-#### Example Code:  
-```python
-import requests
-
-API_URL = 'http://example.com/api/data'
-
-# Send data to the API
-payload = {'temperature': temperature, 'humidity': humidity, 'pressure': pressure}
-response = requests.post(API_URL, json=payload)
-
-# Retrieve data from the API
-if response.status_code == 200:
-    data = requests.get(API_URL).json()
-    print("Received Data:", data)
-else:
-    print("Error:", response.status_code)
-```
-
----
-
-### 6. **Data Modeling and Analysis**  
-   - Analyze sensor data to uncover patterns. For example, **linear regression** predicts future trends based on historical data.  
-   - This can be used to predict environmental conditions or compare trends with school datasets.
-
-#### Example Code:  
-```python
-import numpy as np
-from sklearn.linear_model import LinearRegression
-
-# Example temperature data
-timestamps = [1, 2, 3, 4, 5]
-temperatures = [22, 23, 23.5, 24, 24.5]
-
-# Reshape data for Linear Regression
-X = np.array(timestamps).reshape(-1, 1)
-y = np.array(temperatures)
-
-# Train a linear regression model
-model = LinearRegression().fit(X, y)
-
-# Predict future temperatures
-future_timestamps = np.array([6, 7, 8]).reshape(-1, 1)
-predicted_temperatures = model.predict(future_timestamps)
-print("Predicted Temperatures:", predicted_temperatures)
-```
-
----
-
-### 7. **Comparing with School Data**  
-   - The collected data is compared with existing school data to identify discrepancies and validate sensor accuracy.
-
----
-
-### 8. **Project Documentation**  
-   - **Criteria A (Analysis):** Includes problem identification, justification, and research on sensor technology.  
-   - **Criteria B (Design):** Demonstrates the system architecture, such as data flow diagrams.  
-   - **Criteria C (Development):** Explains the implementation process with annotated code snippets.  
-   - **Criteria D (Evaluation):** Assesses the effectiveness of the project by comparing results with initial goals.
+Originally, I developed an iteration that loops each `r[‘sensor_id’]` and appends the value to the `sensor` if it matches with either 454, 455, or 456. However, it is inefficient since the code loops through all the data that I don’t need which takes more time. Therefore, I decided to use conditional statements instead of nested loops and conditional statements. 
 
 ---
 

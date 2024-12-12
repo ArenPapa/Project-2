@@ -1,5 +1,5 @@
 ![11e470e9022f4fc5b367429bcbb285bc](https://github.com/comsci-uwc-isak/unit2_2023/assets/53995212/1d14b1d3-ae39-4ef3-8ec9-3329630eacae)
- 
+
 # Unit 2: A Distributed Weather Station for ISAK
 
 ## Criteria A: Planning
@@ -9,7 +9,14 @@ A: 500 C: 1500 E: 500
 
 ## Problem definition
 
-The client is K.M. who is an ESS student from an international school in Karuizawa prefecture in Japan. He aims to grow roses for the event in the next school year of winter, which generally blooms in spring to early autumn in Karuizawa. In order to successfully bloom roses in winter, he decided to builde a greenhouse for the rose. To handle the greenhouse properly, he needs to know the best condition for rose to grow by analyzing the conditions both inside and outside the dorm to figure out best environment for its growth on campus precisely. In particular, he needs the data of how temperature, humidity, and air pressure affect it. Since he plans to conduct his research from spring to fall which is when roses grow, he requests the system to be durable and feasible in any weather in Karuizawa. He wants to visualize all data as well as the prediction of the conditions. Lastly, he requests the cost to be low because he is a student and wouldn’t be able to afford an expensive system. 
+My client studies ESS at his international school and he is currently growing roses for the event in the next school year. He is facing three challenges:
+
+The first challenge is the rose generally blooms in spring but he needs to bloom roses in winter successfully. Initially, he decided to build a greenhouse for the roses, but the project failed due to the extreme weather in his town. Therefore, he needs to record temperature, humidity, and air pressure conditions both inside and outside the greenhouse to figure out the best environment for its growth on campus precisely. He is currently recording data on paper, which makes it difficult to keep track of them and it takes a week to do it by hand. 
+
+The second challenge is he does not have an efficient way to visualize the humidity, temperature, and air pressure each minute to analyze data trends. He is currently writing a graph manually to analyze data trends. Recently, there was an incident where he miswrote the graph and he needed to do it from the beginning. Additionally, he prefers smoother graphs over raw ones and wants the ability to predict data trends for the next 12 hours using both linear and quadratic models. As an analysis for the project, he wants a poster with the visualized data and advices on how to cultivate roses along with the process of this system development. 
+
+The third challenge is he moves between many campuses and requires multiple ways of accessing data, which is currently difficult on paper. 
+He did not want to use existing online commercial services because he did not want to disclose private humidity and temperature information online and current online services are not user-friendly. To solve these challenges, we propose a solution to the client. 
 
 ## Proposed Solution
 Considering the client requirements an adequate solution includes a low cost sensing device for humidity, temperature, atmospheric pressure and a custom data script that processes and analyzes the samples acquired. For a low cost sensing device an adequate alternative is the DHT11 sensor[^1] which is offered online for less than 5 USD and provides adequate precision and range for the client requirements (Temperature Range: 0°C to 50°C, Humidity Range: 20% to 90%). Similar devices such as the DHT22, AHT20 or the AM2301B [^2] have higher specifications, however the DHT11 uses a simple serial communication (SPI) rather than more elaborated protocols such as the I2C used by the alternatives. For the range, precision and accuracy required in this application the DHT11 provides the best compromise. Connecting the DHT11 sensor to a computer requires a device that provides a Serial Port communication. A cheap and often used alternative for prototyping is the Raspberry Pi [^3]. "The Raspberry Pi is a very cheap computer that runs Linux, but it also provides a set of GPIO (general purpose input/output) pins, allowing you to control electronic components for physical computing and explore the Internet of Things (IoT).  "[^4]. In addition to the low cost of the Raspberry Pi (> 35USD), this device is programmable and expandable[^1]. I considered alternatives such as different versions of the Pi 400 but their size and price make them a less adequate solution.
@@ -27,19 +34,15 @@ Considering the budgetary constraints of the client and the hardware requirement
 [^6]:Python Geeks. “Advantages of Python: Disadvantages of Python.” Python Geeks, 26 June 2021, https://pythongeeks.org/advantages-disadvantages-of-python/. 
 [^7]: Real Python. “Python vs C++: Selecting the Right Tool for the Job.” Real Python, Real Python, 19 June 2021, https://realpython.com/python-vs-cpp/#memory-management. 
 
-1. The solution provides a visual representation of the Humidity, Temperature and atmospheric pressure (HL) values inside a dormitory (Local) and outside the house (Remote) for a period of minimum 48 hours. ```** [Issue tacled] **: This solves the lack of ability to monitor the environment on campus precisely over time. It also helps collecting data of trends within a day and also between days. My client's request, "he needs to know the best condition ... both inside and outside of the dormitory...In particular, he needsthe data of how temperature, humidity, and air pressure affect it. "```
-<img width="1483" alt="Screenshot 2024-12-08 at 11 28 47 PM" src="https://github.com/user-attachments/assets/666f6430-1ed5-482f-87fd-50bfd74cb3f3">
-<img width="1483" alt="Screenshot 2024-12-08 at 11 28 47 PM" src="https://github.com/user-attachments/assets/861b9ead-4567-4c08-9fbd-c85911b39c75">
-<img width="1483" alt="Screenshot 2024-12-08 at 11 28 47 PM" src="https://github.com/user-attachments/assets/26b96d21-03b8-44fa-9a11-fdc09743717f">
+1. The solution provides a visual representation of the Humidity, Temperature and atmospheric pressure (HL) values inside a dormitory (Local) and outside the house (Remote) for a period of minimum 48 hours. ```** [Issue tacled] **: "he needs to record temperature, humidity, and air pressure conditions both inside and outside the greenhouse to figure out the best environment for its growth on campus precisely."```
+2. The local variables will be measure using a set of 3 sensors around the dormitory.```** [Issue tacled] **: "he needs to record temperature, humidity, and air pressure."```
+3. The solution provides a mathematical modelling for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations.```(HL: non-lineal model)``` ```** [Issue tacled] **: "The second challenge is he does not have an efficient way to visualize the humidity, temperature, and air pressure each minute to analyze data trends."```
+4. The solution provides a comparative analysis for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations including mean, standad deviation, minimum, maximum, and median. ```** [Issue tacled] **: "The second challenge is he does not have an efficient way to visualize the humidity, temperature, and air pressure each minute to analyze data trends." ```
+5. The Local samples are stored in a csv file and posted to the remote server as a backup. ```** [Issue tacled] **: "The third challenge is he moves between many campuses and requires multiple ways of accessing data, which is currently difficult on paper."```
+6. The solution provides data-smoothed graphs for each humidity, temperature, and atmospheric pressure levels. ```** [Issue tacled] **: "Additionally, he prefers smoother graphs over raw ones"```
+7. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he ... wants the ability to predict data trends for the next 12 hours using both linear and quadratic models"```
+8.  The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: "he wants a poster with the visualized data and advices on how to cultivate roses along with the process of this system development."```
 
-
-1. ```[HL]``` The local variables will be measure using a set of 3 sensors around the dormitory.```** [Issue tacled] **: This tests the accuracy of the data enhancing the trsut of the data. This meats the cliet's requirement "he needs to know the best condition for rose to grow .... precisely"```
-2. The solution provides a mathematical modelling for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations.```(HL: non-lineal model)``` ```** [Issue tacled] **: This simplifies and visualize data that is easy to analyze the trends.```
-3. The solution provides a comparative analysis for the Humidity, Temperature and atmospheric pressure (HL) levels for each Local and Remote locations including mean, standad deviation, minimum, maximum, and median. ```** [Issue tacled] **: Have more clear understanding of the condition and have more general understanding when analyzing data. ```
-4. ```(SL)```The Local samples are stored in a csv file and ```(HL)``` posted to the remote server as a backup. ```** [Issue tacled] **: Prevent the data loss by storing data in multiple places. ```
-5. The solution provides a prediction for the subsequent 12 hours for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: The prediction allows the customers to adjust the conditions in the greenhouse once he gets to start his project. ```
-6. The solution includes a poster summarizing the visual representations, model and analysis created. The poster includes a recommendation about healthy levels for Humidity, Temperature and atmospheric pressure (HL). ```** [Issue tacled] **: Summarize all the project to visualize it and make it clear what we accomplished by this project.```
-7. 
 Here’s an exploration of the **TOK connections** based on the questions provided:
 
 ---
@@ -105,18 +108,15 @@ Use of data science in climate research will fundamentally alter our perceptions
 
 ## Flow Chart
 
-<img width="700" alt="Screenshot 2024-12-09 at 8 36 08" src="https://github.com/user-attachments/assets/97e4c8e4-383e-4f0d-8de1-c70d846a185b">
-<img width="700" alt="Screenshot 2024-12-09 at 8 37 35" src="https://github.com/user-attachments/assets/138640f2-50e1-42b6-92dd-4af536ac5369">
-<img width="700" alt="Screenshot 2024-12-09 at 8 38 36" src="https://github.com/user-attachments/assets/b38a4ee2-767b-423c-a0dd-e9e9a18ff794">
+<img width="max" alt="Screenshot 2024-12-13 at 4 07 48" src="https://github.com/user-attachments/assets/dc3da3ba-fbbb-44a3-9c3e-787c2640bd83" />
 
 **Fig.1** Fig. 1 Main function for posting the data. Call register_user() function to create a user account and call authenticate() function to log in and gain an authentication token. It iterates through each sensors to register them, and get sensor_ids. Open the CSV file and iterate by each row. Then, if either temperature, humidiy, or pressure is found, the value is posted to the server. Error is being handled using try-except. 
 
-<img width="500" alt="Screenshot 2024-12-09 at 8 50 24" src="https://github.com/user-attachments/assets/f04d4d17-9ac0-4940-8c75-cef8768c0822">
+<img width="max" alt="Screenshot 2024-12-13 at 4 09 07" src="https://github.com/user-attachments/assets/f0deed35-f84c-4dcd-be75-a40fc8180474" />
+
 **Fig.2** Fig. 2 This is the function called register_sensor which registers sensor handling the erorrs. Getting two inputs from the parameters, send post request to the server. If the status code is 201 which indicates success in registering sensor, it gets the sensor's ID. If it is not successfully registered, then it does error handling.
 
-
-<img width="500" alt="Screenshot 2024-12-09 at 8 59 05" src="https://github.com/user-attachments/assets/26f5702a-c7c2-4d9d-bc4e-a8cbb25659a1">
-
+<img width="max" alt="Screenshot 2024-12-13 at 4 10 33" src="https://github.com/user-attachments/assets/52ec1fc0-ac52-45a0-9595-62a4ea85d9f4" />
 
 **Fig.3** Fig. 3 This is the function called smooth which accomplishes one of the success criteria of this project. This takes windowSize and x, which is a list, and then take the average of the values within the list using window size. It calculates values' average for each windoSize, and appending it to the list called x_smoothed, it will return the x_smoothed in order to use it to plot on the graph which this function makes it easier to see and simplies. 
 
@@ -212,29 +212,41 @@ Here’s an expanded **step-by-step test plan table** with additional detailed s
 
 ## Techniques Used in the Project
 
-### 1. **Data Collection from Sensors**  
-   - **DHT11** and **BME280** sensors are used to measure temperature, humidity, and pressure.  
-   - Python libraries like `Adafruit_DHT` and `smbus2` enable seamless interaction with these sensors.
+1. Lists and dictionaries for storing and organizing data
+2. For loops and While loops for iterating the data
+3. Moving average for smoothing the data
+4. API Integration for storing the data
+5. 
 
-#### Example Code:  
+
+
+### 1. Moving average for smoothing the data
+
+I decided to smooth the data since the sensor readings are noisy, and the client prefers smoother graphs over raw ones (SC#6). To address this, the moving average technique is an adequate technique to smoothen data by averaging values over a sliding window. 
+  
 ```python
-import Adafruit_DHT
-from smbus2 import SMBus
-from bme280 import BME280
+def moving_average(data, window_size=5):
+    smoothed_data = []
+    for i in range(len(data) - window_size + 1):
+        window = data[i:i + window_size]
+        smoothed_data.append(sum(window) / window_size)
+    return smoothed_data
 
-# Initialize sensors
-DHT_SENSOR = Adafruit_DHT.DHT11
-DHT_PIN = 4  # GPIO pin for DHT11
-bme280 = BME280(i2c_dev=SMBus(1))
-
-# Read data from DHT11
-humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-
-# Read data from BME280
-pressure = bme280.get_pressure()
-
-print(f"Temperature: {temperature}°C, Humidity: {humidity}%, Pressure: {pressure} hPa")
 ```
+
+This code defines a `moving_average` function that calculates the moving average of a given data over a specified window size. The `moving_average` function takes two arguments: `data`, a list of numeric values like temperatures, and  `window_size`, the number of consecutive elements to consider for calculating the average of which the default value is 5. Then it creates an empty list, `smoothed_data`, to store the calculated moving average values. A `for loop` then iterates over the `data` list and stops when full `window_size` data is available for averaging. The loop runs from index 0 to `len(data) - window_size`. In each iteration, a "window" of `window_size` elements is extracted from the `data` list, starting at index `i`. When the loop finishes, the moving averages for all possible windows are now stored in the `smoothed_data` list by using `append()`.
+
+Here is the example usage with temperature data:
+
+```python
+# Example usage with temperature data
+temperature_data = [23, 24, 25, 23, 26, 24, 23]
+smoothed_temperatures = moving_average(temperature_data, window_size=3)
+print("Smoothed Temperatures:", smoothed_temperatures)
+
+```
+
+In the example, `temperature_data` contains a list of temperature readings. The `moving_average` function is called with a `window_size` of 3. 
 
 ---
 

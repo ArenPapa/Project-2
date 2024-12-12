@@ -35,9 +35,6 @@ Considering the budgetary constraints of the client and the hardware requirement
 [^7]: Real Python. “Python vs C++: Selecting the Right Tool for the Job.” Real Python, Real Python, 19 June 2021, https://realpython.com/python-vs-cpp/#memory-management. 
 
 1. The solution provides a visual representation of the Humidity, Temperature and atmospheric pressure (HL) values inside a dormitory (Local) and outside the house (Remote) for a period of minimum 48 hours. ```** [Issue tacled] **: This solves the lack of ability to monitor the environment on campus precisely over time. It also helps collecting data of trends within a day and also between days. My client's request, "he needs to know the best condition ... both inside and outside of the dormitory...In particular, he needsthe data of how temperature, humidity, and air pressure affect it. "```
-<img width="1483" alt="Screenshot 2024-12-08 at 11 28 47 PM" src="https://github.com/user-attachments/assets/666f6430-1ed5-482f-87fd-50bfd74cb3f3">
-<img width="1483" alt="Screenshot 2024-12-08 at 11 28 47 PM" src="https://github.com/user-attachments/assets/861b9ead-4567-4c08-9fbd-c85911b39c75">
-<img width="1483" alt="Screenshot 2024-12-08 at 11 28 47 PM" src="https://github.com/user-attachments/assets/26b96d21-03b8-44fa-9a11-fdc09743717f">
 
 
 1. ```[HL]``` The local variables will be measure using a set of 3 sensors around the dormitory.```** [Issue tacled] **: This tests the accuracy of the data enhancing the trsut of the data. This meats the cliet's requirement "he needs to know the best condition for rose to grow .... precisely"```

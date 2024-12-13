@@ -254,7 +254,7 @@ In the example, `temperature_data` contains a list of temperature readings. The 
 
 ### 2. API integration for storing the data 
 
-I have decided to store the data in the API, given that the client moves between many campuses and requires multiple ways of accessing data. (Success Criteria #5) The same API retrieves the processed data for visualization. Libraries like requests enable sending HTTP POST and GET requests. 
+I have decided to store the data in the API, given that the client moves between many campuses and requires multiple ways of accessing data. **(Success Criteria #5)** The same API retrieves the processed data for visualization. Libraries like requests enable sending HTTP POST and GET requests. 
 
 ```python
 import requests

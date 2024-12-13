@@ -213,12 +213,12 @@ Here’s an expanded **step-by-step test plan table** with additional detailed s
 ## Techniques Used in the Project
 
 1. Lists and dictionaries for storing and organizing data
-2. For loops and While loops for iterating retrieving data from the sensor
+2. For loops and While loops for iterating data
 3. Moving average for smoothing the data
 4. API Integration for storing the data
 5. Numeric conversion for 12 hours prediction
 6. Matplotlib for plotting data
-7. Try-Except block for handling errors
+7. Retrieving Data from the sensor
 8. GET/POST Requests to collect and post data
 
 

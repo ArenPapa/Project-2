@@ -387,7 +387,9 @@ The `sensor` dictionary has a key for each sensor IDs, 454, 455, and 456. The va
 
 
 # Criteria D: Functionality
+Scientific Poster:
+[https://www.canva.com/design/DAGYtM1qFs8/-F-tnVXwE4MusvYYKBIcMQ/edit?utm_content=DAGYtM1qFs8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+](https://www.canva.com/design/DAGYtM1qFs8/-F-tnVXwE4MusvYYKBIcMQ/edit?utm_content=DAGYtM1qFs8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-https://www.canva.com/design/DAGYtM1qFs8/-F-tnVXwE4MusvYYKBIcMQ/edit?utm_content=DAGYtM1qFs8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-https://drive.google.com/drive/folders/1lH_ZzbZMkpvYp4y6ZYAR8oUjv79LdfTW?usp=share_link
+Video: https://drive.google.com/drive/folders/1lH_ZzbZMkpvYp4y6ZYAR8oUjv79LdfTW?usp=share_link
 A 7 min video demonstrating the proposed solution with narration

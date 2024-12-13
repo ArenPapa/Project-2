@@ -219,6 +219,7 @@ Here’s an expanded **step-by-step test plan table** with additional detailed s
 5. Numeric conversion for 12 hours prediction
 6. Matplotlib for plotting data
 7. Try-Except block for handling errors
+8. GET/POST Requests 
 
 
 ### 1. Moving average for smoothing the data
